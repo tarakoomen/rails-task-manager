@@ -1,0 +1,43 @@
+<%# <h1>Welcome to your Task Manager</h1>
+<h3>Below are your tasks:</h2>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <%# <li><%= link_to task.title, task_path(task) %>
+    <%# <%= link_to "Delete Task", %>
+    <%# task_path(@tasks),
+    <%# data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+    <%# %>
+    <%# </li> %>
+  <%# <% end %>
+  <%# </ul> %>
+
+  <%# <%= link_to("Add new task", new_task_path) %>
+
+
+<div class="container mt-5">
+  <h1>Welcome to your Task Manager</h1>
+  <h3>These are your tasks:</h2>
+
+  <ul id="tasks">
+    <% @tasks.each do |task| %>
+      <li>
+        <% if task.completed? %>
+          <i class="fa-regular fa-square-check"></i>
+        <% else %>
+          <i class="fa-regular fa-square"></i>
+        <% end %>
+        <%= link_to task.title, task_path(task.id) %>
+        <%= link_to task_path(task.id), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{task.title}?"} do %>
+          <i class="fa-regular fa-trash-can"></i>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <hr>
+
+  <%= link_to new_task_path do %>
+    <i class="fa-solid fa-plus"></i> Add a new task
+  <% end %>
+</div>
